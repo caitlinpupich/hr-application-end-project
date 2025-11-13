@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
-import Login from './components/LogIn/LogIn'
+import Login from './components/LoginForm/LoginForm'
 
 function App() {
  
@@ -9,7 +9,7 @@ function App() {
     <>
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<LoginForm/>} />
       </Routes>
     </Router>
     </>
