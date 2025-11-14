@@ -1,4 +1,37 @@
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 const LoginForm = () => {
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [role, setRole] = useState('employee') //This sets the defualt role to emplpoyee
+    
+    const navigate = useNavigate()
+
+        const handleLogin = (e) => {
+            e.preventDefault()
+
+            if (username === "emp" && password === "123" && role === "employee") {
+                console.log("Employee login successful for username: ", username, ". Navigating to Employee Home Page...")
+                localStorage.setItem("isLoggedIn", "true")
+                localStorage.setItem("role", role)
+                window.dispatchEvent(new Event("storage"))
+                navigate("/employee")
+            }
+
+            else if (username === "hr" && password === "123" && role === "hr") {
+                console.log("HR login successful for username: ", username, ". Navigating to HR Home Page...")
+                localStorage.setItem("isLoggedIn", "true")
+                localStorage.setItem("role", role)
+                window.dispatchEvent(new Event("storage"))
+                navigate("/hr")
+            }
+            
+            else {
+             alert("Invalid login. Please try again.")
+            }
+        }
+    
     return(
     <div class = "min-h-screen flex items-center justify-center p-4">
         <div class="w-full max-w-sm">
@@ -14,6 +47,8 @@ const LoginForm = () => {
                             Username:
                         </label>
                         <input 
+                            value = {username}
+                            onChange = {(e) => setUsername(e.target.value)}
                             type="text" 
                             id="username" 
                             name="username" 
@@ -28,6 +63,8 @@ const LoginForm = () => {
                             Password:
                         </label>
                         <input 
+                            value = {password}
+                            onChange = {(e) => setPassword(e.target.value)}
                             type="password"
                             id="password"
                             name="password"
@@ -40,6 +77,8 @@ const LoginForm = () => {
                     <legend class= "text-sm md:text-lg font-medium text-gray-700">Select Role:</legend>
                     <div class="flex items-center">
                         <input
+                            checked = {role === "employee"}
+                            onChange={(e) => setRole(e.target.value)}
                             type = "radio"
                             id = "employee"
                             name = "role"
@@ -47,13 +86,15 @@ const LoginForm = () => {
                             required 
                             class="h-4 w-4 text-indigo-600 border-gray-300"
                         />
-                        <label htmlFor="hr" class="ml-2 block text-sm text-gray-700 cursor-pointer">
+                        <label htmlFor="employee" class="ml-2 block text-sm text-gray-700 cursor-pointer">
                             Employee
                         </label>
                     </div>
 
                     <div class="flex items-center">
                         <input
+                            checked = {role === "hr"}
+                            onChange={(e) => setRole(e.target.value)}
                             type = "radio"
                             id = "hr"
                             name = "role"
@@ -61,15 +102,16 @@ const LoginForm = () => {
                             dafaultChecked
                             class="h-4 w-4 border-gray-300"
                         />
-                        <label htmlFor="employee" class="ml-2 block text-sm text-gray-700 cursor-pointer">
+                        <label htmlFor="hr" class="ml-2 block text-sm text-gray-700 cursor-pointer">
                             HR
                         </label>
                     </div>
                 </fieldset>
 
                 <button 
-                    type="submit"
-                    class="border rounded-lg bg-indigo-600 text-white px-4 py-2 w-full hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                type="submit"
+                class="border rounded-lg bg-indigo-600 text-white px-4 py-2 w-full hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                onClick = {handleLogin}
                 >Log In</button>
             </form>
         </div>
