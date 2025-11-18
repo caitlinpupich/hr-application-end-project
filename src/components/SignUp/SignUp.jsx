@@ -13,25 +13,48 @@ const SignUp = () => {
     //Defining useNavigate as navigate so it can be used to redirect after succesfully creating a new employee profile.s
     const navigate = useNavigate()
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         
-        //Consolidate all the form data into a JSON object to be stored at a JSON endpoint
+        //Consolidate all the form data into a JSON object. Data pulled from the state variables.
         const newEmployee = {
-            firstName: firstName,
-            lastName: lastName,
-            username: username,
-            password: password,
-            experience: experience,
-            department: department
+            firstName,
+            lastName,
+            username,
+            password,
+            experience,
+            department
         }
+        
+        // 1. Send the data to the local server
+        try {
+            const response = await fetch ('http://localhost:3000/employees',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
 
-        console.log("New employee profile created: ", newEmployee)
+                //Convert JS object in JSON string so it can be sent to the server
+                body: JSON.stringify(newEmployee)
+                })
 
+                //Check for status
+                if (!response.ok){
+                    throw new Error (`HTTP error! status: ${response.status}`)
+                }
 
-        alert("Profile created successfully! Redirecting to the login page to sign in.")
-        navigate("/")
-    }
+                const data = await response.json()
+                console.log("New employee profile created: ", newEmployee)
+                alert("Profile created successfully! Redirecting to the login page to sign in.")
+                navigate("/")
+            }
+
+            catch (error) {
+                console.error("Error creating profile:', error.message")
+                alert ("Failed to create profile. Please check the console or reach out for support. Error for refference: ${error.message}")
+            }
+        }
+    
 
 
     return(
