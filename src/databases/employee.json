@@ -1,0 +1,31 @@
+{
+  "employees": [
+    {
+      "firstName": "Alex",
+      "lastName": "Johnson",
+      "username": "ajohnson",
+      "password": "hashed_password_123",
+      "experience": 5,
+      "department": "engineering",
+      "id": "c502"
+    },
+    {
+      "firstName": "Maria",
+      "lastName": "Rodriguez",
+      "username": "mrodriguez",
+      "password": "secure_password_456",
+      "experience": 2,
+      "department": "marketing",
+      "id": "282f"
+    },
+    {
+      "id": "fd74",
+      "firstName": "asfd",
+      "lastName": "asdf",
+      "username": "sadf",
+      "password": "asdf",
+      "experience": "4",
+      "department": "engineering"
+    }
+  ]
+}
