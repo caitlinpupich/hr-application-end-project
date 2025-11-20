@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-import FetchEmployees from "../../utils/FetchEmployees";
-
 const LoginForm = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -13,38 +11,47 @@ const LoginForm = () => {
         const handleLogin = async (e) => {
             e.preventDefault()
 
-            //For all employee type logins, we will run their username by the JSON server to ensure it exists and the information is correct. Pulling from utils/FetchEmployees.js for full function.
             if (role === "employee") {
-                const allEmployees = await FetchEmployees
-                
-                //This function will take the array returned by the pullEmployeeData function and check if the username and password entered in the form match any of the employee objects in the array.
-                const verifyLogin = () => 
-                    employee = allEmployees.find(employee => employee.username === username && employee.password === password)
-                    if (employee) {
-                        console.log("Employee login successful for username: ", username, ". Navigating to Employee Home Page...")
-                        localStorage.setItem("isLoggedIn", "true")
-                        localStorage.setItem("role", role)
-                        localStorage.setItem("username", username)
-                        navigate("/employee")
+                    const pullEmployeeData = async() => {
+                    try {
+                        const response = await fetch('http://localhost:3000/employees')
+                        
+                        if (!response.ok) {
+                            throw new Error(`Server error! status: ${response.status}`)
+                        }
+
+                        const data = await response.json()
+                        console.log("All employee data pulled from server succesfully!: ", data)
+                        const employee = data.find(employee => employee.username === username && employee.password === password)
+                         if (employee) {
+                            console.log("Employee login successful for username: ", username, ". Navigating to Employee Home Page...")
+                            localStorage.setItem("isLoggedIn", "true")
+                            localStorage.setItem("role", role)
+                            localStorage.setItem("username", username)
+                            navigate("/employee")
+                        } else {
+                            alert("Invalid login. Please try again.")
+                        } 
                     }
 
-                    else {
-                        alert("Invalid login. Please try again.")
+                    catch (error) {
+                        console.error("Error fetching employee list to verify login credentials: ", error.message)
                     }
+                }
+                pullEmployeeData () 
             }
-            
+    
 
-            else if (username === "HRAdminLogin" && password === "UniversalHRLogin123!" && role === "hr") {
-                console.log("HR login successful for username: ", username, ". Navigating to HR Home Page...")
-                localStorage.setItem("isLoggedIn", "true")
-                localStorage.setItem("role", role)
-                navigate("/hr")
+            else if (username == "HRAdmin" && password === "UniversalHRPass123" && role === "hr") {
+                console.log("Successful HR Login. Redirecting to HR Home Page")
             }
-            
+
             else {
-             alert("Invalid login. Please try again.")
-            }
+                alert("Invalid Login. Please try again or sign up.")
+            }  
+
         }
+
     
     return(
     <div class = "min-h-screen flex items-center justify-center p-4">
