@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+import FetchEmployees from "../../utils/FetchEmployees";
+
 const LoginForm = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -8,22 +10,34 @@ const LoginForm = () => {
     
     const navigate = useNavigate()
 
-        const handleLogin = (e) => {
+        const handleLogin = async (e) => {
             e.preventDefault()
 
-            if (username === "emp" && password === "123" && role === "employee") {
-                console.log("Employee login successful for username: ", username, ". Navigating to Employee Home Page...")
-                localStorage.setItem("isLoggedIn", "true")
-                localStorage.setItem("role", role)
-                window.dispatchEvent(new Event("storage"))
-                navigate("/employee")
-            }
+            //For all employee type logins, we will run their username by the JSON server to ensure it exists and the information is correct. Pulling from utils/FetchEmployees.js for full function.
+            if (role === "employee") {
+                const allEmployees = await FetchEmployees
+                
+                //This function will take the array returned by the pullEmployeeData function and check if the username and password entered in the form match any of the employee objects in the array.
+                const verifyLogin = () => 
+                    employee = allEmployees.find(employee => employee.username === username && employee.password === password)
+                    if (employee) {
+                        console.log("Employee login successful for username: ", username, ". Navigating to Employee Home Page...")
+                        localStorage.setItem("isLoggedIn", "true")
+                        localStorage.setItem("role", role)
+                        localStorage.setItem("username", username)
+                        navigate("/employee")
+                    }
 
-            else if (username === "hr" && password === "123" && role === "hr") {
+                    else {
+                        alert("Invalid login. Please try again.")
+                    }
+            }
+            
+
+            else if (username === "HRAdminLogin" && password === "UniversalHRLogin123!" && role === "hr") {
                 console.log("HR login successful for username: ", username, ". Navigating to HR Home Page...")
                 localStorage.setItem("isLoggedIn", "true")
                 localStorage.setItem("role", role)
-                window.dispatchEvent(new Event("storage"))
                 navigate("/hr")
             }
             
@@ -99,7 +113,6 @@ const LoginForm = () => {
                             id = "hr"
                             name = "role"
                             value = "hr"
-                            dafaultChecked
                             class="h-4 w-4 border-gray-300"
                         />
                         <label htmlFor="hr" class="ml-2 block text-sm text-gray-700 cursor-pointer">

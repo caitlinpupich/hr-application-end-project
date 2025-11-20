@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-    //Collect the data from the form and store it in state variables
+    //Collect the data from the form and store it in state 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [firstName, setFirstName] = useState("")
@@ -10,7 +10,7 @@ const SignUp = () => {
     const [experience, setExperience] = useState("")
     const [department, setDepartment] = useState("")
 
-    //Defining useNavigate as navigate so it can be used to redirect after succesfully creating a new employee profile.s
+    //Defining useNavigate as navigate so it can be used to redirect after succesfully creating a new employee profiles.
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
@@ -22,11 +22,11 @@ const SignUp = () => {
             lastName,
             username,
             password,
-            experience,
+            experience: parseInt(experience, 10), // Convert experience to an integer
             department
         }
         
-        // 1. Send the data to the local server
+        // Asynchronous request to send employee data to local JSON server. This server must be initiated in the terminal using the employee.json file in order to work.
         try {
             const response = await fetch ('http://localhost:3000/employees',{
                 method: 'POST',
