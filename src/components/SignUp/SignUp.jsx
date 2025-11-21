@@ -34,7 +34,7 @@ const SignUp = () => {
                     'Content-Type': 'application/json',
                 },
 
-                //Convert JS object in JSON string so it can be sent to the server
+                //Convert JS object in JSON string so it can be sent to the server within the body of the request.
                 body: JSON.stringify(newEmployee)
                 })
 

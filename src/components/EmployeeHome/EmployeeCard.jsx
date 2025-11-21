@@ -1,4 +1,3 @@
-import FetchEmployees from "../../utils/FetchEmployees.jsx"
 import { useState, useEffect } from "react"
 
 const EmployeeCard = () => {
