@@ -69,10 +69,10 @@ const SignUp = () => {
             <form class = "bg-white p-8 border border-gray-200 rounded-xl shadow-2xl space-y-6"
             onSubmit={(handleSubmit)}
             >
-                    <div class = "space-y-2">
+                    <div className = "space-y-2">
                         <label 
                             htmlFor="username"
-                            class = "block text-sm md:text-lg font-medium text-gray-700">
+                            className = "block text-sm md:text-lg font-medium text-gray-700">
                             Set Username:
                         </label>
                         <input 

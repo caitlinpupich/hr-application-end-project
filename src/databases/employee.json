@@ -1,15 +1,6 @@
 {
   "employees": [
     {
-      "id": "e6d1",
-      "firstName": "Jane",
-      "lastName": "Doe",
-      "username": "jdoe",
-      "password": "123doe!",
-      "experience": 4,
-      "department": "sales"
-    },
-    {
       "id": "502b",
       "firstName": "Liam",
       "lastName": "Chen",
@@ -26,6 +17,15 @@
       "password": "sarahPass123!",
       "experience": 3,
       "department": "engineering"
+    },
+    {
+      "id": "b307",
+      "firstName": "Caitlin",
+      "lastName": "Pupich",
+      "username": "cpup",
+      "password": "easypass123",
+      "experience": 4,
+      "department": "marketing"
     }
   ]
 }
