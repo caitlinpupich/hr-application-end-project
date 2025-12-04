@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import {useEffect} from "react";
 
 const LoginForm = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [role, setRole] = useState('employee') //This sets the defualt role to emplpoyee
+    const [isLoading, setIsLoading] = useState('false') 
     
     const navigate = useNavigate()
-
         const handleLogin = async (e) => {
             e.preventDefault()
 
@@ -36,6 +37,7 @@ const LoginForm = () => {
 
                     catch (error) {
                         console.error("Error fetching employee list to verify login credentials: ", error.message)
+                        alert("Error fetching server information to verify login. Please try again later.")
                     }
                 }
                 pullEmployeeData () 
@@ -54,17 +56,19 @@ const LoginForm = () => {
 
     
     return(
-    <div class = "min-h-screen flex items-center justify-center p-4">
-        <div class="w-full max-w-sm">
-            <div class="text-center mb-6">
-                <h1 class="text-3xl font-extrabold text-gray-900">Sign In</h1>
+    <div className = "min-h-screen flex items-center justify-center p-4">
+        <div className="w-full max-w-sm">
+            <div className="text-center mb-6">
+                <h1 className="text-3xl font-extrabold text-gray-900">Sign In</h1>
             </div>
             
-            <form class = "bg-white p-8 border border-gray-200 rounded-xl sahdo-2xl space-y-6 ">
-                    <div class = "space-y-2">
+            <form className = "bg-white p-8 border border-gray-200 rounded-xl sahdo-2xl space-y-6 "
+            onSubmit = {handleLogin}
+            >
+                    <div className = "space-y-2">
                         <label 
                             htmlFor="username"
-                            class = "block text-sm md:text-lg font-medium text-gray-700">
+                            className = "block text-sm md:text-lg font-medium text-gray-700">
                             Username:
                         </label>
                         <input 
@@ -74,13 +78,13 @@ const LoginForm = () => {
                             id="username" 
                             name="username" 
                             required 
-                            class= "border rounded-lg shadow-sm"
+                            className = "border rounded-lg shadow-sm"
                         />
                     </div>
 
-                    <div class= "space-y-2">
+                    <div className = "space-y-2">
                         <label htmlFor="password"
-                            class = "block text-sm md:text-lg font-medium text-gray-700">
+                            className = "block text-sm md:text-lg font-medium text-gray-700">
                             Password:
                         </label>
                         <input 
@@ -90,13 +94,13 @@ const LoginForm = () => {
                             id="password"
                             name="password"
                             required 
-                            class= "border rounded-lg shadow-sm "
+                            className = "border rounded-lg shadow-sm "
                         />
                     </div>
 
-                <fieldset class="pt-4">
-                    <legend class= "text-sm md:text-lg font-medium text-gray-700">Select Role:</legend>
-                    <div class="flex items-center">
+                <fieldset className ="pt-4">
+                    <legend className = "text-sm md:text-lg font-medium text-gray-700">Select Role:</legend>
+                    <div className="flex items-center">
                         <input
                             checked = {role === "employee"}
                             onChange={(e) => setRole(e.target.value)}
@@ -105,14 +109,14 @@ const LoginForm = () => {
                             name = "role"
                             value = "employee"
                             required 
-                            class="h-4 w-4 text-indigo-600 border-gray-300"
+                            className ="h-4 w-4 text-indigo-600 border-gray-300"
                         />
-                        <label htmlFor="employee" class="ml-2 block text-sm text-gray-700 cursor-pointer">
+                        <label htmlFor="employee" className ="ml-2 block text-sm text-gray-700 cursor-pointer">
                             Employee
                         </label>
                     </div>
 
-                    <div class="flex items-center">
+                    <div className="flex items-center">
                         <input
                             checked = {role === "hr"}
                             onChange={(e) => setRole(e.target.value)}
@@ -120,9 +124,9 @@ const LoginForm = () => {
                             id = "hr"
                             name = "role"
                             value = "hr"
-                            class="h-4 w-4 border-gray-300"
+                            className ="h-4 w-4 border-gray-300"
                         />
-                        <label htmlFor="hr" class="ml-2 block text-sm text-gray-700 cursor-pointer">
+                        <label htmlFor="hr" className ="ml-2 block text-sm text-gray-700 cursor-pointer">
                             HR
                         </label>
                     </div>
@@ -130,8 +134,7 @@ const LoginForm = () => {
 
                 <button 
                 type="submit"
-                class="border rounded-lg bg-indigo-600 text-white px-4 py-2 w-full hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                onClick = {handleLogin}
+                className ="border rounded-lg bg-indigo-800 font-semibold text-white px-4 py-2 w-full hover:bg-indigo-700 cursor-pointer"
                 >Log In</button>
             </form>
         </div>

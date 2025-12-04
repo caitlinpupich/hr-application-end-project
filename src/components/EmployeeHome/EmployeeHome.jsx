@@ -3,21 +3,24 @@ import RequestLeave from '../RequestLeaveForm/RequestLeaveForm.jsx';
 
 const EmployeeHome = () => {
     return (
-        <div class = "min-h-screen flex items-center justify-center p-4">
-                <div class="w-full max-w-sm">
+        <div class="flex items-center justify-center p-3">
+            <div class="w-full max-w-2xl">
+                <div className="flex flex-col">
                     <div class="text-center">
-                        <h1 class="text-3xl font-extrabold text-gray-900 p-2">Welcome Back</h1>
-                        <div className="mb-4">
+
+                        <h1 class="text-3xl font-extrabold text-gray-900 p-2"> Welcome Back</h1>
+                        <div>
                             <EmployeeCard />
                         </div>
-                        <h1 className="text-3xl font-extrabold text-gray-900 pb-2">Request Leave</h1>
+                        <h1 className="text-3xl font-extrabold text-gray-900 p-2">Request Leave</h1>
                         <div>
-                           <RequestLeave />
+                            <RequestLeave />
                         </div>
                     </div>
                 </div>
             </div>
-            
+        </div>
+
     )
 }
 

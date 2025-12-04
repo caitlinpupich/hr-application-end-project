@@ -26,7 +26,7 @@ const SignUp = () => {
             department
         }
         
-        // Asynchronous request to send employee data to local JSON server. This server must be initiated in the terminal using the employee.json file in order to work.
+        // Asynchronous request to send employee data to local JSON server. This server must be initiated employee.json file at port 3000 in order to work.
         try {
             const response = await fetch ('http://localhost:3000/employees',{
                 method: 'POST',
@@ -168,7 +168,7 @@ const SignUp = () => {
 
                 <button 
                     type="submit"
-                    class="border rounded-lg bg-indigo-600 text-white font-semibold px-4 py-2 w-full hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    class="border rounded-lg bg-indigo-800 hover:bg-indigo-600 text-white font-semibold px-4 py-2 w-full cursor-pointer"
                 >Add Profile</button>
             </form>
         </div>

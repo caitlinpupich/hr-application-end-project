@@ -8,7 +8,7 @@ const NavHeader = () => {
 
     const navigate = useNavigate()
 
-    // Fucntion to determine the correct Home link URL
+    // Function to determine the correct Home link URL
     const getHomeLink = (loggedIn, userRole) => {
         if (loggedIn && userRole === "employee") {
             return "http://localhost:5173/employee";
@@ -27,11 +27,14 @@ const NavHeader = () => {
         navigate("/")
     }
 
-    //Store correct link path in homeLink to reference in the return element
+    
+    const secondButtonText = loggedIn? "Log Out" : "Sign Up"
+    const secondButtonAction = loggedIn? logOut : () => navigate("/signup")
+
     const homeLink = getHomeLink(loggedIn, userRole)
 
     return (
-        <nav className="bg-white shadow-md border-b border-gray-200">
+        <nav className="bg-indigo-900 shadow-md border-b border-gray-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
 
@@ -39,22 +42,18 @@ const NavHeader = () => {
 
                         {/* Home Link with Dynamic Href */}
                         <a
-                            // We use the pre-calculated 'homeLink' variable here
+                            // Using the pre-calculated 'homeLink' variable here
                             href={homeLink}
-                            className="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-base font-medium transition duration-150"
+                            className="text-white hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium transition duration-150"
                         >
                             Home
                         </a>
-
-                        {/* Logout Button/Link */}
-                        {loggedIn && (
                             <button
-                                onClick = {logOut}
-                                className="bg-indigo-600 text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-base font-medium shadow-lg transition duration-150 ease-in-out"
+                                onClick={secondButtonAction}
+                                className="bg-black text-white hover:bg-gray-700 px-3 py-2 rounded-md text-base font-medium shadow-lg transition duration-150 ease-in-out cursor-pointer"
                             >
-                                Logout
+                                {secondButtonText}
                             </button>
-                        )}
 
                     </div>
 

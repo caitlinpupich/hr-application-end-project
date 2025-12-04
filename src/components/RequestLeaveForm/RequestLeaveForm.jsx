@@ -44,7 +44,7 @@ const RequestLeave = () => {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center p-4">
+        <div className="flex items-center justify-center p-4">
             <div className="w-full max-w-sm">
                 <div className="text-center mb-6 flex justify-center flex-col">
                     
@@ -86,7 +86,7 @@ const RequestLeave = () => {
                         </input>
 
                         <button 
-                        className="bg-indigo-700 rounded-lg p-2 font-semibold text-white"
+                        className="bg-indigo-700 hover:bg-indigo-900 rounded-lg p-2 font-semibold text-white cursor-pointer"
                         type="submit"
                         >
                             Submit Request
