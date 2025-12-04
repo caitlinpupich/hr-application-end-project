@@ -19,9 +19,6 @@ const HRHome = () => {
                             <h2 className="text-2xl font-bold py-3">Open Leave Requests</h2>
                     </div>
                     <LeaveManage />
-                    <button className="mt-4 font-semibold text-white py-1 px-3 rounded-lg bg-indigo-700">
-                        View past requests...
-                    </button>
                 </div>
                     
             </div>

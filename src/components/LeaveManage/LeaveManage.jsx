@@ -114,12 +114,12 @@ const LeaveManage = () => {
                         <h4 className="text-sm lg:text-base">
                             End Date Requested: {req.endDate}
                         </h4>
-                        <button className="rounded-lg py-1 px-2 m-1 bg-green-300"
+                        <button className="rounded-lg py-1 px-2 m-1 bg-green-300 hover:bg-green-600 hover:cursor-pointer"
                             onClick={() => approveRequest(req)}
                         >
                             Approve
                         </button>
-                        <button className="rounded-lg py-1 px-2 m-1 bg-red-300"
+                        <button className="rounded-lg py-1 px-2 m-1 bg-red-300 hover:bg-red-600 hover:cursor-pointer"
                             onClick={() => declineRequest(req)}
                         >
                             Decline

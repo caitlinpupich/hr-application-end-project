@@ -138,13 +138,13 @@ const FullEmployeeList = () => {
                             <p className="text-gray-700 mb-2">Department: {emp.department}</p>
                             <div className="mt-3 flex-col">
                                 <button
-                                    className="bg-indigo-800 text-white font-semibold px-4 py-1 rounded-lg mr-2"
+                                    className="bg-indigo-700 hover:bg-indigo-900 hover:cursor-pointer text-white font-semibold px-4 py-1 rounded-lg mr-2"
                                     onClick={() => openEdit(emp)}
                                 >
                                     Edit
                                 </button>
                                 <button 
-                                className="bg-red-700 text-white font-semibold px-4 py-1 rounded-lg mr-2"
+                                className="bg-red-700 hover:bg-red-900 hover:cursor-pointer text-white font-semibold px-4 py-1 rounded-lg mr-2"
                                 onClick = {() => openDeleteConfirm(emp)}>
                                     Remove
                                 </button>
@@ -214,7 +214,7 @@ const FullEmployeeList = () => {
 
                             <div className="flex justify-end gap-2">
                                 <button
-                                    className="px-4 py-2 rounded border"
+                                    className="px-4 py-2 rounded border hover:cursor-pointer"
                                     onClick={closeEdit}
                                     type="button"
                                     disabled={saving}
@@ -222,7 +222,7 @@ const FullEmployeeList = () => {
                                     Cancel
                                 </button>
                                 <button
-                                    className="px-4 py-2 rounded bg-indigo-700 text-white"
+                                    className="px-4 py-2 rounded bg-indigo-700 hover:bg-indigo-900 hover:cursor-pointer text-white"
                                     onClick={saveEdit}
                                     type="button"
                                     disabled={saving}
@@ -244,12 +244,12 @@ const FullEmployeeList = () => {
                     onClick={(e) => e.stopPropagation()}
                     >
                         <p className="text-gray-700 mb-6">Are you sure you want to permanently remove this employee?</p>
-                        <button className="text-xl font-bold text-gray-900 bg-red-500 rounded-lg m-1 p-1"
+                        <button className="text-xl font-bold text-white bg-red-500 hover:bg-red-900 hover:cursor-pointer rounded-lg m-1 p-1"
                         onClick={removeEmployee}
                         disabled={isDeleting}>
                             Confirm Delete
                         </button>
-                        <button onClick={closeDeleteConfirm} className="bg-black rounded-lg p-1 m-1 text-white">
+                        <button onClick={closeDeleteConfirm} className="bg-black hover:bg-gray-700 hover:cursor-pointer rounded-lg p-1 m-1 text-white">
                             Close
                         </button>
                     </div>
