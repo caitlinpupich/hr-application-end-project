@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+//This componenet will:
+    // 1. Render a signup form to collect new employee profile data.
+    // 2. Send the collected data to the local JSON server to store the new employee profile.
+
+//---SIGN UP COMPONENT---//
 const SignUp = () => {
-    //Collect the data from the form and store it in state 
+    //Set up state variables to hold form data as it is entered by the user. 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [firstName, setFirstName] = useState("")
@@ -10,13 +15,16 @@ const SignUp = () => {
     const [experience, setExperience] = useState("")
     const [department, setDepartment] = useState("")
 
-    //Defining useNavigate as navigate so it can be used to redirect after succesfully creating a new employee profiles.
     const navigate = useNavigate()
 
+    //---HANDLE FORM SUBMISSION FUNCTION---//
+        //1. Consolidate form data into a JSON object.
+        //2. Send the data to the local JSON server using a POST request.
+        //3. Navigate to the login page upon successful profile creation.
     const handleSubmit = async (e) => {
         e.preventDefault()
         
-        //Consolidate all the form data into a JSON object. Data pulled from the state variables.
+        //1. Consolidate form data into a JSON object.
         const newEmployee = {
             firstName,
             lastName,
@@ -26,7 +34,7 @@ const SignUp = () => {
             department
         }
         
-        // Asynchronous request to send employee data to local JSON server. This server must be initiated employee.json file at port 3000 in order to work.
+        // 2. Asynchronous request to send employee data to local JSON server.
         try {
             const response = await fetch ('http://localhost:3000/employees',{
                 method: 'POST',
@@ -38,7 +46,6 @@ const SignUp = () => {
                 body: JSON.stringify(newEmployee)
                 })
 
-                //Check for status
                 if (!response.ok){
                     throw new Error (`HTTP error! status: ${response.status}`)
                 }
@@ -46,6 +53,7 @@ const SignUp = () => {
                 const data = await response.json()
                 console.log("New employee profile created: ", newEmployee)
                 alert("Profile created successfully! Redirecting to the login page to sign in.")
+        //3. Navigate to the login page upon successful profile creation.
                 navigate("/")
             }
 
@@ -56,9 +64,11 @@ const SignUp = () => {
         }
     
 
-
+    //---RENDER SIGN UP FORM---//
+        //Form to collect new employee profile data.
+        //On submit, calls handleSubmit function.
+        //Each input updates its corresponding state variable on change.
     return(
-    //Full page container to control the spacing of the form using flexbox
     <div class = "min-h-screen flex items-center justify-center p-4">
         <div class="w-full max-w-sm">
             <div class="text-center mb-6">

@@ -1,18 +1,24 @@
 
 import { useState } from "react";
 
-const RequestLeave = () => {
+const RequestLeaveForm = () => {
 
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("")
     
-    //Set the status for a ticket as open. Set username from Local Storage. These will be static, which is why I am not using useState.
+    //Set the status for a ticket as open. Set username from Local Storage. 
+        //These will be static, which is why I am not using useState.
     const status = "open"
     const username = localStorage.getItem("username")
 
+    //---FUNCTION TO HANDLE SUBMITTING A NEW LEAVE REQUEST---
+
+
     const handleRequestSubmit = async (e) => {
         e.preventDefault()
-
+        //Request object to be sent to the server.
+            //startDate and endDate pulled from state variables above.
+            //username and status are static variables defined above.
         const newRequest = {
             startDate, 
             endDate,
@@ -20,6 +26,7 @@ const RequestLeave = () => {
             status
         }
 
+        //Send request object to the server using POST method.
         try {
             const response = await fetch('http://localhost:3001/requests', {
                 method: 'POST',
@@ -27,7 +34,6 @@ const RequestLeave = () => {
                     'Content-Type': 'application/json',
                 },
 
-                //Convert JS object in JSON string so it can be sent to the server within the body of the request.
                 body: JSON.stringify(newRequest)
             })
             if (!response.ok) {
@@ -35,14 +41,17 @@ const RequestLeave = () => {
             }
 
             const data = await response.json()
-            console.log("New request created: ", newRequest, "Please wait for a response from HR.")
-            alert(`Request sucesfully created fir the folowing dates. Start Date:, ${startDate}, End Date: ${endDate}. Request is now being reviewed.`)
+            console.log("New request created: ", newRequest)
+            alert(`Request sucesfully created for the folowing dates. Start Date: ${startDate}, End Date: ${endDate}. Request is now being reviewed.`)
         } catch (error) {
-            console.error("Error creating profile:', error.message")
-            alert("Failed to create profile. Please check the console or reach out for support. Error for refference: ${error.message}")
+            console.error("Error creating request:", error.message)
+            alert(`Failed to create request. Please check the console or reach out for support: ${error.message}`)
         }
     }
 
+    //Form to request leave. On submit
+        //Each input updates its corresponding state variable on change.
+        //On submit, calls handleRequestSubmit function.
     return (
         <div className="flex items-center justify-center p-4">
             <div className="w-full max-w-sm">
@@ -98,4 +107,4 @@ const RequestLeave = () => {
     )
 }
 
-export default RequestLeave
+export default RequestLeaveForm

@@ -1,3 +1,6 @@
+//This component will display an unauthorized access message when a user tries to access a page they do not have permission to view.
+    //It will have its own route in App.jsx.
+
 const Unautorized = () => {
     return (
         <div className="flex flex-col items-center justify-center bg-gray-100">

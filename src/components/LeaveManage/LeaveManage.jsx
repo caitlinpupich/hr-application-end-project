@@ -10,21 +10,25 @@ const LeaveManage = () => {
         const pullOpenRequests = async () => {
             try {
                 const response = await fetch("http://localhost:3001/requests")
-                if (!response.ok) throw new Error(`Server error! status: ${response.status}`)
+                if (!response.ok) throw new Error(`Server error  pulling requests! status: ${response.status}`)
 
                 const data = await response.json()
                 console.log("Leave Requests Pulled Succesfully!")
                 setLeaveList(data)
             } catch (error) {
-                console.error("Error fetching reqeust list ", error.message)
-                alert("Server error pulling leave reqeusts. Please try again later.")
+                console.error("Error fetching request list ", error.message)
+                alert("Server error pulling leave reqeusts. Please try again later to load leave requests.")
             } finally {
                 setLoading(false)
             }
         }
         pullOpenRequests()
-    }, [])
+    }, []) // Empty dependency array to ensure this only runs once when the component mounts.
 
+    //Function to approve leave requests (on button click). This will: 
+        // 1. Create a new entry in the approved requests database with status set to closed.
+        // 2. Remove the original request from the open requests database.
+        // 3. Update the local state to remove the approved request from the displayed list.
     const approveRequest = async (req) => {
         const approvedData = {
             ...req,
@@ -45,22 +49,27 @@ const LeaveManage = () => {
         }
 
         try {
-                const id = req.id
-                const response = await fetch(`http://localhost:3001/requests/${id}`, {
-                    method: "DELETE"
-                })
-                if (!response.ok) throw new Error(`Failed to delete open request: ${response.status}`)
-                
-                setLeaveList(prevList => prevList.filter(item => item.id !== req.id))
-            } catch (err) {
-                console.error("Error removing open request:", err)
-                alert("Error removing open request:", err)
-                return;
-            }
+            const id = req.id
+            const response = await fetch(`http://localhost:3001/requests/${id}`, {
+                method: "DELETE"
+            })
+            if (!response.ok) throw new Error(`Failed to delete open request: ${response.status}`)
+
+            setLeaveList(prevList => prevList.filter(item => item.id !== req.id))
+        } catch (err) {
+            console.error("Error removing open request:", err)
+            alert("Error removing closed requests from the open request list in database. Please contact admin:", err)
+            return;
+        }
         console.log("Request approval succesful")
         alert("Request approval succesful!")
     }
 
+
+    //Function to decline leave requests (on button click). This will: 
+        // 1. Create a new entry in the declined requests section of the database with status set to closed.
+        // 2. Remove the original request from the open requests section of the database.
+        // 3. Update the local state to remove the declined request from the displayed list.
     const declineRequest = async (req) => {
         const declinedData = {
             ...req,
@@ -72,7 +81,7 @@ const LeaveManage = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(declinedData)
             })
-            if (!response.ok) throw new Error(`Failed to save declined request: ${response.status}`)
+            if (!response.ok) throw new Error(`Failed to save declined request in database: ${response.status}`)
 
         } catch (err) {
             console.error("Error declining request:", err)
@@ -81,18 +90,18 @@ const LeaveManage = () => {
         }
 
         try {
-                const id = req.id
-                const response = await fetch(`http://localhost:3001/requests/${id}`, {
-                    method: "DELETE"
-                })
-                if (!response.ok) throw new Error(`Failed to delete open request: ${response.status}`)
-                
-                setLeaveList(prevList => prevList.filter(item => item.id !== req.id))
-            } catch (err) {
-                console.error("Servor error removing open request:", err)
-                alert("Server error removing open request:", err)
-                return;
-            }
+            const id = req.id
+            const response = await fetch(`http://localhost:3001/requests/${id}`, {
+                method: "DELETE"
+            })
+            if (!response.ok) throw new Error(`Failed to delete open request: ${response.status}`)
+
+            setLeaveList(prevList => prevList.filter(item => item.id !== req.id))
+        } catch (err) {
+            console.error("Servor error removing open request:", err)
+            alert("Error removing closed requests from the open request list in database:", err)
+            return;
+        }
         console.log("Request decline succesful")
         alert("Request decline succesful!")
     }
@@ -115,12 +124,14 @@ const LeaveManage = () => {
                             End Date Requested: {req.endDate}
                         </h4>
                         <button className="rounded-lg py-1 px-2 m-1 bg-green-300 hover:bg-green-600 hover:cursor-pointer"
+                            //Calling function for approved requests on click of the button.
                             onClick={() => approveRequest(req)}
                         >
                             Approve
                         </button>
                         <button className="rounded-lg py-1 px-2 m-1 bg-red-300 hover:bg-red-600 hover:cursor-pointer"
-                            onClick={() => declineRequest(req)}
+                           //Calling function for declined requests on click of the button.
+                           onClick={() => declineRequest(req)}
                         >
                             Decline
                         </button>

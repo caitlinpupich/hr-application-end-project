@@ -1,5 +1,5 @@
 import EmployeeCard from './EmployeeCard.jsx'
-import RequestLeave from '../RequestLeaveForm/RequestLeaveForm.jsx';
+import RequestLeaveForm from '../RequestLeaveForm/RequestLeaveForm.jsx';
 
 const EmployeeHome = () => {
     return (
@@ -8,13 +8,13 @@ const EmployeeHome = () => {
                 <div className="flex flex-col">
                     <div class="text-center">
 
-                        <h1 class="text-3xl font-extrabold text-gray-900 p-2"> Welcome Back</h1>
+                        <h1 class="text-3xl font-extrabold text-gray-900 p-6"> Welcome Back</h1>
                         <div>
                             <EmployeeCard />
                         </div>
-                        <h1 className="text-3xl font-extrabold text-gray-900 p-2">Request Leave</h1>
+                        <h1 className="text-3xl font-extrabold text-gray-900 p-3">Request Leave</h1>
                         <div>
-                            <RequestLeave />
+                            <RequestLeaveForm />
                         </div>
                     </div>
                 </div>

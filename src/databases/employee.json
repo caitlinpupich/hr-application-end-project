@@ -6,7 +6,7 @@
       "lastName": "Chen",
       "username": "Lchen",
       "password": "pass1234!",
-      "experience": 5,
+      "experience": 7,
       "department": "marketing"
     },
     {
@@ -26,6 +26,15 @@
       "password": "easypass123",
       "experience": 4,
       "department": "marketing"
+    },
+    {
+      "id": "d77d",
+      "firstName": "Peter",
+      "lastName": "Jones",
+      "username": "Pjones",
+      "password": "newpass1234!",
+      "experience": 9,
+      "department": "accounting"
     }
   ]
 }
