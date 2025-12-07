@@ -4,9 +4,9 @@
       "id": "502b",
       "firstName": "Liam",
       "lastName": "Chen",
-      "username": "Lchen",
+      "username": "Lchen1",
       "password": "pass1234!",
-      "experience": 7,
+      "experience": 9,
       "department": "marketing"
     },
     {
@@ -28,13 +28,13 @@
       "department": "marketing"
     },
     {
-      "id": "d77d",
-      "firstName": "Peter",
-      "lastName": "Jones",
-      "username": "Pjones",
-      "password": "newpass1234!",
-      "experience": 9,
-      "department": "accounting"
+      "id": "0428",
+      "firstName": "Richard",
+      "lastName": "Castle",
+      "username": "rcastle",
+      "password": "mysterywriter123",
+      "experience": 12,
+      "department": "sales"
     }
   ]
 }

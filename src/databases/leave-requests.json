@@ -1,13 +1,5 @@
 {
-  "requests": [
-    {
-      "id": "9662",
-      "startDate": "2025-12-05",
-      "endDate": "2025-12-08",
-      "username": "smiller",
-      "status": "open"
-    }
-  ],
+  "requests": [],
   "approved": [
     {
       "id": "0266",
@@ -20,6 +12,13 @@
       "id": "16fa",
       "startDate": "2025-11-04",
       "endDate": "2025-11-21",
+      "username": "cpup",
+      "status": "closed"
+    },
+    {
+      "id": "08f2",
+      "startDate": "2025-12-01",
+      "endDate": "2025-12-05",
       "username": "cpup",
       "status": "closed"
     }
@@ -36,6 +35,13 @@
       "id": "8ac5",
       "startDate": "2026-01-20",
       "endDate": "2026-01-28",
+      "username": "smiller",
+      "status": "closed"
+    },
+    {
+      "id": "9662",
+      "startDate": "2025-12-05",
+      "endDate": "2025-12-08",
       "username": "smiller",
       "status": "closed"
     }

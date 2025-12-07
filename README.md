@@ -18,4 +18,6 @@ If you are developing a production application, we recommend using TypeScript wi
 # Using the Application
 
 ## Databases
-This application will require local databases to be run using the employee.json and leave-request.json files. A json server must be set up on for employee.json on port 3000, and for leave-request.json on port 3001.
+This application will require local databases to be run using the employee.json and leave-request.json files. 
+- employee.json must be set up on port 3000
+- leave-request.json must be set up on port 3001
